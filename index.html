@@ -7554,7 +7554,7 @@ It tests whether a structural exposure gate reduces downside vulnerability.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [82]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [99]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -7562,7 +7562,6 @@ It tests whether a structural exposure gate reduces downside vulnerability.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-<span class="c1"># 1) 找 repo 根目录（用 outputs 当锚点）</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">find_repo_root</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="s2">"."</span><span class="p">):</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -7574,16 +7573,13 @@ It tests whether a structural exposure gate reduces downside vulnerability.</p>
 <span class="n">ROOT</span> <span class="o">=</span> <span class="n">find_repo_root</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"ROOT ="</span><span class="p">,</span> <span class="n">ROOT</span><span class="p">)</span>
 
-<span class="c1"># 2) 读 Phase2 输出（你之前 CSV 就在这里）</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">ROOT</span> <span class="o">/</span> <span class="s2">"outputs"</span> <span class="o">/</span> <span class="s2">"phase2"</span> <span class="o">/</span> <span class="s2">"phase2_strategy_series.csv"</span><span class="p">,</span>
     <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s2">"date"</span><span class="p">],</span>
 <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"date"</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># 3) 列名清洗：防止导出/复制时出现奇怪空格</span>
 <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-<span class="c1"># 4) 基本过滤</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"ret_1q_fwd"</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -7604,7 +7600,7 @@ It tests whether a structural exposure gate reduces downside vulnerability.</p>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[82]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[99]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8170,14 +8166,14 @@ Phase2   (invested==1): {'n': 79, 'mean': 0.010715496359134645, 'vol': 0.0090156
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [90]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [100]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">fisher_exact</span>
 
 <span class="n">sub</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"regime"</span><span class="p">]</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="n">thr</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"ret_1q_fwd"</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>   <span class="c1"># bottom 10% 定义 crash</span>
+<span class="n">thr</span> <span class="o">=</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"ret_1q_fwd"</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.10</span><span class="p">)</span>   
 <span class="n">sub</span><span class="p">[</span><span class="s2">"crash"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="s2">"ret_1q_fwd"</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">thr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
 <span class="n">tab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="s2">"supply_high"</span><span class="p">],</span> <span class="n">sub</span><span class="p">[</span><span class="s2">"crash"</span><span class="p">])</span>
@@ -8388,18 +8384,16 @@ Odds ratio: inf
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [96]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [101]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"df columns:"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"san columns:"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">san</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 
-<span class="c1"># 看 merge 后到底有什么列</span>
 <span class="n">full</span> <span class="o">=</span> <span class="n">san</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">"date"</span><span class="p">,</span> <span class="s2">"ret_1q_fwd"</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"regime"</span><span class="p">,</span><span class="s2">"regime_label"</span><span class="p">,</span><span class="s2">"regime_state"</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]],</span>
                  <span class="n">on</span><span class="o">=</span><span class="s2">"date"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"date"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"full columns:"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">full</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 
-<span class="c1"># 如果你怀疑出现了 regime_x / regime_y</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Columns containing 'regime':"</span><span class="p">,</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">full</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s2">"regime"</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()])</span>
 <span class="n">full</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -8422,7 +8416,7 @@ Columns containing 'regime': ['regime_x', 'regime_y']
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[96]:</div>
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[101]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <div>
 <style scoped="">
@@ -8550,17 +8544,15 @@ Columns containing 'regime': ['regime_x', 'regime_y']
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [97]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [102]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">split</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2004-12-31"</span><span class="p">)</span>
 
-<span class="c1"># 1) 先把 san 的 Regime 统一成 regime，避免大小写坑</span>
 <span class="n">san2</span> <span class="o">=</span> <span class="n">san</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="k">if</span> <span class="s2">"Regime"</span> <span class="ow">in</span> <span class="n">san2</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s2">"regime"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">san2</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="n">san2</span> <span class="o">=</span> <span class="n">san2</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">"Regime"</span><span class="p">:</span> <span class="s2">"regime"</span><span class="p">})</span>
 
-<span class="c1"># 2) merge（这里 san2 和 df 都有 regime -&gt; 会产生 regime_x / regime_y）</span>
 <span class="n">full</span> <span class="o">=</span> <span class="n">san2</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
     <span class="n">df</span><span class="p">[[</span><span class="s2">"date"</span><span class="p">,</span> <span class="s2">"ret_1q_fwd"</span><span class="p">,</span> <span class="s2">"regime"</span><span class="p">]],</span>
     <span class="n">on</span><span class="o">=</span><span class="s2">"date"</span><span class="p">,</span>
@@ -8568,22 +8560,17 @@ Columns containing 'regime': ['regime_x', 'regime_y']
     <span class="n">suffixes</span><span class="o">=</span><span class="p">(</span><span class="s2">"_san"</span><span class="p">,</span> <span class="s2">"_df"</span><span class="p">),</span>
 <span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"date"</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># 3) 明确用 df 的 regime（Phase1那套），统一命名成 regime</span>
-<span class="c1"># 现在列名会是: regime_san, regime_df</span>
 <span class="k">if</span> <span class="s2">"regime_df"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">full</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected 'regime_df' not found. Columns: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">full</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="n">full</span><span class="p">[</span><span class="s2">"regime"</span><span class="p">]</span> <span class="o">=</span> <span class="n">full</span><span class="p">[</span><span class="s2">"regime_df"</span><span class="p">]</span>
 
-<span class="c1"># 可选：你想确认两套 regime 是否一致（不一致要警惕）</span>
 <span class="n">mismatch</span> <span class="o">=</span> <span class="p">(</span><span class="n">full</span><span class="p">[</span><span class="s2">"regime_san"</span><span class="p">]</span> <span class="o">!=</span> <span class="n">full</span><span class="p">[</span><span class="s2">"regime_df"</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">if</span> <span class="s2">"regime_san"</span> <span class="ow">in</span> <span class="n">full</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="kc">None</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Regime mismatch count (san vs df):"</span><span class="p">,</span> <span class="n">mismatch</span><span class="p">)</span>
 
-<span class="c1"># 4) 切分 train/test</span>
 <span class="n">train</span> <span class="o">=</span> <span class="n">full</span><span class="p">[</span><span class="n">full</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">split</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">test</span>  <span class="o">=</span> <span class="n">full</span><span class="p">[</span><span class="n">full</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span> <span class="o">&gt;</span>  <span class="n">split</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="c1"># 5) 用 train 算阈值，拿去 test 做 OOS gate</span>
 <span class="n">q</span> <span class="o">=</span> <span class="mf">0.90</span>
 <span class="n">thr_supply</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">"supply_value"</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
 
